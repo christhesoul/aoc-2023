@@ -1,12 +1,12 @@
 module Day01
   class << self
     def part_one(input)
-      numberizer = Numberizer.new(check_words: false)
+      numberizer = Numberizer.new(check_for_words: false)
       input.sum { |line| calibration_value(line, numberizer) }
     end
 
     def part_two(input)
-      numberizer = Numberizer.new(check_words: true)
+      numberizer = Numberizer.new(check_for_words: true)
       input.sum { |line| calibration_value(line, numberizer) }
     end
 
@@ -18,19 +18,19 @@ module Day01
   end
 
   class Numberizer
-    NUM_STRINGS = (1..9).map(&:to_s)
+    NUMBER_CHARS = (1..9).map(&:to_s)
     NUMBER_WORDS = %w[zero one two three four five six seven eight nine]
 
-    def initialize(check_words:)
-      @check_words = check_words
+    def initialize(check_for_words:)
+      @check_for_words = check_for_words
     end
-    attr_reader :check_words
+    attr_reader :check_for_words
 
     def numberize(line)
       line.chars.filter_map.with_index do |char, index|
-        next char if NUM_STRINGS.include?(char)
+        next char if NUMBER_CHARS.include?(char)
 
-        number_word_at_index(line, index)&.to_s if check_words
+        number_word_at_index(line, index)&.to_s if check_for_words
       end.compact
     end
 
