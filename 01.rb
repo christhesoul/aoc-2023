@@ -39,7 +39,3 @@ module Day01
     end
   end
 end
-
-input = File.read("inputs/01.txt").split
-puts Day01.part_one(input)
-puts Day01.part_two(input)
